@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipe of the Day</title>
+  
+</head>
+<link rel="stylesheet" href="/styles/style.css"/>
+<body>
+    <div id="navbar"></div>
+
+    <div id="cont"></div>
+</body>
+</html>
+<script type="module">
+
+    import navbar from "./components/navbar.js"
+
+    import {getData1,append1} from "./scripts/latestRec.js"
+
+    let navbar_div = document.getElementById("navbar")
+    
+    navbar_div.innerHTML= navbar();
+
+    // try getting the data on console
+
+    let response = getData1(`https://www.themealdb.com/api/json/v1/1/search.php?s=Chicken`)
+    response.then((res)=>{
+        console.log(res);
+        let container = document.getElementById("cont");
+        append1(res.meals,container)
+     
+    })
+    .catch((err)=>{
+        console.log(err);
+    });
+</script>
